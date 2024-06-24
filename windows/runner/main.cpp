@@ -24,8 +24,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
 
   project.set_dart_entrypoint_arguments(std::move(command_line_arguments));
 
+  HMONITOR primaryMonitor = ::MonitorFromWindow(nullptr, MONITOR_DEFAULTTOPRIMARY);
+  MONITORINFO monitorInfo;
+  monitorInfo.cbSize = sizeof(MONITORINFO);
+  ::GetMonitorInfo(primaryMonitor, &monitorInfo);
+  int screenWidth = monitorInfo.rcMonitor.right - monitorInfo.rcMonitor.left;
+  int screenHeight = monitorInfo.rcMonitor.bottom - monitorInfo.rcMonitor.top;
+
   FlutterWindow window(project);
-  Win32Window::Point origin(10, 10);
+  Win32Window::Point origin(screenWidth - 280, screenHeight - 150);
   Win32Window::Size size(280, 120);
   if (!window.Create(L"timer", origin, size)) {
     return EXIT_FAILURE;
