@@ -51,7 +51,7 @@ class _TimerScreenState extends State<TimerScreen> {
       _timer?.cancel();
     } else {
       _isTimeUp = false;
-      _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
         setState(() {
           if (_seconds > 0) {
             _seconds--;
@@ -96,7 +96,7 @@ class _TimerScreenState extends State<TimerScreen> {
           autofocus: true,
           child: Center(
             child: _isTimeUp
-                ? AutoSizeText(
+                ? const AutoSizeText(
                     'Time is up!',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -107,17 +107,17 @@ class _TimerScreenState extends State<TimerScreen> {
                         onPlay: (controller) =>
                             controller.repeat(reverse: true))
                     .shake(
-                      duration: Duration(seconds: 1),
+                      duration: const Duration(seconds: 1),
                     )
                 : Text(
-                  textHeightBehavior: TextHeightBehavior(
+                  textHeightBehavior: const TextHeightBehavior(
                     applyHeightToLastDescent: false,
                     applyHeightToFirstAscent: true,
                     leadingDistribution: TextLeadingDistribution.proportional,
                   ),
                   '$_minutes:${_seconds.toString().padLeft(2, '0')}',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
                     height: 0.7,
                     fontSize: 100,
                     fontWeight: FontWeight.bold,
